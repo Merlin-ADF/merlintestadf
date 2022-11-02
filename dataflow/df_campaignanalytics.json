@@ -94,10 +94,21 @@
 				"     insertable:true,",
 				"     updateable:false,",
 				"     upsertable:false,",
+				"     truncate:true,",
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> tgtcampaignanalytics"
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          Region,",
+				"          Country,",
+				"          ProductCategory,",
+				"          CampaignName,",
+				"          Revenue,",
+				"          RevenueTarget,",
+				"          City,",
+				"          State",
+				"     )) ~> tgtcampaignanalytics"
 			]
 		}
 	}
