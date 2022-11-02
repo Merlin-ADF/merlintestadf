@@ -27,7 +27,7 @@
 					"name": "renamefields"
 				},
 				{
-					"name": "derivedColumn"
+					"name": "formattingfields"
 				},
 				{
 					"name": "deleteunwantedfields"
@@ -65,8 +65,8 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> renamefields",
 				"renamefields derive(Revenue = toDecimal(replace(concat(toString(RevenuePart1), toString(Revenue)), '\\\\', ''), 10, 2, '$###,###.##'),",
-				"          RevenueTarget = toDecimal(replace(concat(toString(RevenueTargetPart1), toString(RevenueTarget)), '\\\\', ''), 10, 2, '$###,###.##')) ~> derivedColumn",
-				"derivedColumn select(mapColumn(",
+				"          RevenueTarget = toDecimal(replace(concat(toString(RevenueTargetPart1), toString(RevenueTarget)), '\\\\', ''), 10, 2, '$###,###.##')) ~> formattingfields",
+				"formattingfields select(mapColumn(",
 				"          Region,",
 				"          Country,",
 				"          ProductCategory,",
@@ -78,7 +78,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> deleteunwantedfields",
-				" sink(allowSchemaDrift: true,",
+				"deleteunwantedfields sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
 				"     insertable:true,",
