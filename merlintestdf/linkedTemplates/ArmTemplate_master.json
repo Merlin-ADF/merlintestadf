@@ -1,0 +1,77 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "merlintestdf"
+		},
+		"ls_campaignanalytics_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'ls_campaignanalytics'"
+		},
+		"ls_campaignanalytics_db_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls_campaignanalytics_db'"
+		},
+		"ls_campaignanalytics_dlgen2_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'ls_campaignanalytics_dlgen2'"
+		},
+		"ls_campaignanalytics_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://merlinadf.dfs.core.windows.net/"
+		},
+		"ls_campaignanalytics_dlgen2_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://merlinadf.dfs.core.windows.net/"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "merlintestdf_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"ls_campaignanalytics_accountKey": {
+						"value": "[parameters('ls_campaignanalytics_accountKey')]"
+					},
+					"ls_campaignanalytics_db_connectionString": {
+						"value": "[parameters('ls_campaignanalytics_db_connectionString')]"
+					},
+					"ls_campaignanalytics_dlgen2_accountKey": {
+						"value": "[parameters('ls_campaignanalytics_dlgen2_accountKey')]"
+					},
+					"ls_campaignanalytics_properties_typeProperties_url": {
+						"value": "[parameters('ls_campaignanalytics_properties_typeProperties_url')]"
+					},
+					"ls_campaignanalytics_dlgen2_properties_typeProperties_url": {
+						"value": "[parameters('ls_campaignanalytics_dlgen2_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
