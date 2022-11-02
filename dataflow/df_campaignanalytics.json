@@ -24,13 +24,13 @@
 			],
 			"transformations": [
 				{
-					"name": "renamefields"
+					"name": "sltrenamefields"
 				},
 				{
-					"name": "formattingfields"
+					"name": "dcformattingfields"
 				},
 				{
-					"name": "deleteunwantedfields"
+					"name": "sltdeleteunwantedfields"
 				}
 			],
 			"scriptLines": [
@@ -63,10 +63,10 @@
 				"          State = {_col9_}",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> renamefields",
-				"renamefields derive(Revenue = toDecimal(replace(concat(toString(RevenuePart1), toString(Revenue)), '\\\\', ''), 10, 2, '$###,###.##'),",
-				"          RevenueTarget = toDecimal(replace(concat(toString(RevenueTargetPart1), toString(RevenueTarget)), '\\\\', ''), 10, 2, '$###,###.##')) ~> formattingfields",
-				"formattingfields select(mapColumn(",
+				"     skipDuplicateMapOutputs: true) ~> sltrenamefields",
+				"sltrenamefields derive(Revenue = toDecimal(replace(concat(toString(RevenuePart1), toString(Revenue)), '\\\\', ''), 10, 2, '$###,###.##'),",
+				"          RevenueTarget = toDecimal(replace(concat(toString(RevenueTargetPart1), toString(RevenueTarget)), '\\\\', ''), 10, 2, '$###,###.##')) ~> dcformattingfields",
+				"dcformattingfields select(mapColumn(",
 				"          Region,",
 				"          Country,",
 				"          ProductCategory,",
@@ -77,8 +77,8 @@
 				"          State",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> deleteunwantedfields",
-				"deleteunwantedfields sink(allowSchemaDrift: true,",
+				"     skipDuplicateMapOutputs: true) ~> sltdeleteunwantedfields",
+				"sltdeleteunwantedfields sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
 				"     insertable:true,",
