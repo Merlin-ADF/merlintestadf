@@ -1,5 +1,5 @@
 {
-	"name": "dataflow1",
+	"name": "df_campaignanalytics",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
@@ -9,7 +9,7 @@
 						"referenceName": "ds_campaignanalytics",
 						"type": "DatasetReference"
 					},
-					"name": "source1"
+					"name": "srccampaignanalytics"
 				}
 			],
 			"sinks": [],
@@ -27,7 +27,7 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> source1"
+				"     ignoreNoFilesFound: false) ~> srccampaignanalytics"
 			]
 		}
 	}
