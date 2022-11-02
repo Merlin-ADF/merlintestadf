@@ -22,11 +22,7 @@
 					"name": "tgtcampaignanalytics"
 				}
 			],
-			"transformations": [
-				{
-					"name": "renamefields"
-				}
-			],
+			"transformations": [],
 			"scriptLines": [
 				"source(output(",
 				"          {_col0_} as string,",
@@ -44,18 +40,6 @@
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
 				"     skipLines: 1) ~> srccampaignanalytics",
-				"srccampaignanalytics select(mapColumn(",
-				"          Column_1,",
-				"          Column_2,",
-				"          Column_3,",
-				"          Column_4,",
-				"          Column_5,",
-				"          Column_6,",
-				"          Column_7,",
-				"          Column_8",
-				"     ),",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> renamefields",
 				" sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
