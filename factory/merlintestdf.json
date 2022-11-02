@@ -1,0 +1,9 @@
+{
+	"name": "merlintestdf",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "0933786b-4669-4104-a73c-3f95de187ef2",
+		"tenantId": "bc4bc204-04a4-4471-b73d-532d55c97392"
+	}
+}
