@@ -28,6 +28,9 @@
 				},
 				{
 					"name": "derivedColumn"
+				},
+				{
+					"name": "deleteunwantedfields"
 				}
 			],
 			"scriptLines": [
@@ -63,6 +66,18 @@
 				"     skipDuplicateMapOutputs: true) ~> renamefields",
 				"renamefields derive(Revenue = toDecimal(replace(concat(toString(RevenuePart1), toString(Revenue)), '\\\\', ''), 10, 2, '$###,###.##'),",
 				"          RevenueTarget = toDecimal(replace(concat(toString(RevenueTargetPart1), toString(RevenueTarget)), '\\\\', ''), 10, 2, '$###,###.##')) ~> derivedColumn",
+				"derivedColumn select(mapColumn(",
+				"          Region,",
+				"          Country,",
+				"          ProductCategory,",
+				"          CampaignName,",
+				"          Revenue,",
+				"          RevenueTarget,",
+				"          City,",
+				"          State",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> deleteunwantedfields",
 				" sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
