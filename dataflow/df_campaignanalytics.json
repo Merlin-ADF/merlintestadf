@@ -1,6 +1,7 @@
 {
 	"name": "df_campaignanalytics",
 	"properties": {
+		"description": "To Load Data from csv file to DB",
 		"type": "MappingDataFlow",
 		"typeProperties": {
 			"sources": [
@@ -12,7 +13,15 @@
 					"name": "srccampaignanalytics"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_campaignanalytics_db",
+						"type": "DatasetReference"
+					},
+					"name": "tgtcampaignanalytics"
+				}
+			],
 			"transformations": [],
 			"scriptLines": [
 				"source(output(",
@@ -27,7 +36,17 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> srccampaignanalytics"
+				"     ignoreNoFilesFound: false) ~> srccampaignanalytics",
+				"srccampaignanalytics sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> tgtcampaignanalytics"
 			]
 		}
 	}
