@@ -16,7 +16,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "ds_campaignanalytics_db",
+						"referenceName": "ds_campaignanalyticsdb",
 						"type": "DatasetReference"
 					},
 					"name": "tgtcampaignanalytics"
@@ -80,25 +80,24 @@
 				"     skipDuplicateMapOutputs: true) ~> sltdeleteunwantedfields",
 				"sltdeleteunwantedfields sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     input(",
+				"          Region as string,",
+				"          Country as string,",
+				"          ProductCategory as string,",
+				"          CampaignName as string,",
+				"          Revenue as decimal(10,2),",
+				"          RevenueTarget as decimal(10,2),",
+				"          City as string,",
+				"          State as string",
+				"     ),",
 				"     deletable:false,",
 				"     insertable:true,",
 				"     updateable:false,",
 				"     upsertable:false,",
-				"     truncate:true,",
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError',",
-				"     mapColumn(",
-				"          Region,",
-				"          Country,",
-				"          ProductCategory,",
-				"          CampaignName,",
-				"          Revenue,",
-				"          RevenueTarget,",
-				"          City,",
-				"          State",
-				"     )) ~> tgtcampaignanalytics"
+				"     errorHandlingOption: 'stopOnFirstError') ~> tgtcampaignanalytics"
 			]
 		}
 	}
