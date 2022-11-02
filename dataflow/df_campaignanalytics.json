@@ -4,15 +4,7 @@
 		"description": "To Load Data from csv file to DB",
 		"type": "MappingDataFlow",
 		"typeProperties": {
-			"sources": [
-				{
-					"dataset": {
-						"referenceName": "ds_campaignanalytics",
-						"type": "DatasetReference"
-					},
-					"name": "srccampaignanalytics"
-				}
-			],
+			"sources": [],
 			"sinks": [
 				{
 					"dataset": {
@@ -24,20 +16,7 @@
 			],
 			"transformations": [],
 			"scriptLines": [
-				"source(output(",
-				"          Region as string,",
-				"          Country as string,",
-				"          Product_Category as string,",
-				"          Campaign_Name as string,",
-				"          Revenue as string,",
-				"          Revenue_Target as string,",
-				"          City as string,",
-				"          State as string",
-				"     ),",
-				"     allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> srccampaignanalytics",
-				"srccampaignanalytics sink(allowSchemaDrift: true,",
+				" sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
 				"     insertable:true,",
